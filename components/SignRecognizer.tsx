@@ -115,13 +115,10 @@ export function SignRecognizer({ onGloss }: Props) {
 
       if (!landmarkerRef.current) {
         const vision = await loadMediaPipeVision();
-        const fileset = await vision.FilesetResolver.forVisionTasks(
-          "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm"
-        );
+        const fileset = await vision.FilesetResolver.forVisionTasks("/mediapipe/wasm");
         landmarkerRef.current = await vision.HandLandmarker.createFromOptions(fileset, {
           baseOptions: {
-            modelAssetPath:
-              "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+            modelAssetPath: "/mediapipe/hand_landmarker.task",
             delegate: "GPU"
           },
           runningMode: "VIDEO",
@@ -384,12 +381,7 @@ export function SignRecognizer({ onGloss }: Props) {
 }
 
 async function loadMediaPipeVision() {
-  const cdnUrl = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/vision_bundle.mjs";
-  const importer = new Function("url", "return import(url)") as (
-    url: string
-  ) => Promise<MediaPipeVisionModule>;
-
-  return importer(cdnUrl);
+  return (await import("@mediapipe/tasks-vision")) as MediaPipeVisionModule;
 }
 
 function loadLocalTemplates() {
