@@ -8,8 +8,8 @@ Demo line: "Sign Wave gives the patient and clinician a shared tablet channel in
 
 ## Slide 2: MVP
 
-- Patient signs ASL alphabet/common signs, explicit medical phrases, or types a correction.
-- MediaPipe landmarks plus DTW produce a gloss.
+- Patient signs ASL letters or types a correction.
+- MediaPipe landmarks plus DTW produce a letter.
 - Structured LLM route creates clinician-readable notes in English, Latvian, Russian, and Swedish.
 - Clinician can speak the note aloud and type back to the patient.
 

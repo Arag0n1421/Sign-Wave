@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dtwDistance, matchTemplate } from "@/lib/dtw";
+import { combineHandFeatures, dtwDistance, HAND_FEATURE_SIZE, landmarksToAngleFeatures, matchTemplate } from "@/lib/dtw";
 import type { SignTemplate } from "@/lib/types";
 
 const templates: SignTemplate[] = [
@@ -54,5 +54,38 @@ describe("dtw recognition helpers", () => {
 
     expect(match?.gloss).toBe("PAIN");
     expect(match?.confidence).toBeGreaterThan(0.7);
+  });
+
+  it("builds gabguerin-style pairwise hand-angle features", () => {
+    const landmarks = Array.from({ length: 21 }, (_, index) => ({
+      x: index / 20,
+      y: (index % 5) / 5,
+      z: 0
+    }));
+
+    expect(landmarksToAngleFeatures(landmarks)).toHaveLength(HAND_FEATURE_SIZE);
+    expect(combineHandFeatures([], landmarksToAngleFeatures(landmarks))).toHaveLength(
+      HAND_FEATURE_SIZE * 2
+    );
+  });
+
+  it("rejects unknown sequences when no templates contain examples", () => {
+    const match = matchTemplate(
+      [
+        [0.1, 0.2],
+        [0.2, 0.3]
+      ],
+      [
+        {
+          id: "empty",
+          gloss: "A",
+          label: "Letter A",
+          tags: ["asl"],
+          examples: []
+        }
+      ]
+    );
+
+    expect(match).toBeNull();
   });
 });

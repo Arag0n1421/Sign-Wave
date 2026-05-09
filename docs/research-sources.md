@@ -16,7 +16,7 @@ Sources checked on 2026-05-09:
    Next's current App Router docs make the manifest and service worker path straightforward. A hand-written service worker is easier to reason about during a 24 hour hackathon.
 
 2. Treat WLASL as research inspiration, not bundled production data.
-   The starter `public/asl_templates.json` file is a demo placeholder. Replace it with templates recorded by the team for the exact pitch vocabulary.
+   The starter `public/asl_templates.json` file is now only an A-Z letter registry. Letter examples are recorded locally in the browser.
 
 3. Use a deterministic fallback path.
    The demo must survive missing API keys, model throttling, bad Wi-Fi, or failed JSON parsing.
@@ -34,7 +34,7 @@ Sources checked on 2026-05-09:
    The gabguerin repo is directly relevant because it uses MediaPipe hand landmarks, normalized hand-connection angles, DTW over time, and confidence/voting. It is best for controlled templates and a curated demo set. For broader ASL, plan a later trainable model such as LSTM/temporal CNN/Transformer over landmark sequences.
 
 8. Treat "general ASL translator" as a staged roadmap.
-   The next shippable version can support ASL alphabet/common signs and explicit medical phrase templates. Open-ended ASL requires more data, signer variation, body/face context, and grammar handling.
+   The current shippable version is ASL letters only. Open-ended ASL requires more data, signer variation, body/face context, and grammar handling.
 
 ## Additional Repos Reviewed
 
@@ -42,6 +42,10 @@ Sources checked on 2026-05-09:
 - `shubhammore1251/Sign-Language-Recognition-Using-Mediapipe-and-React`: useful React/MediaPipe learning-app reference, with a claimed scope of 26 ASL alphabets and 16 common words.
 - `kaushiks-info/Real-Time-ASL-Gesture-Recognition`: useful reminder that teams often need to collect and train their own landmark data because accuracy depends heavily on hand shape, lighting, and camera setup.
 - `metehanozdeniz/sign-language-recognition`: useful reference for a later word-level model pipeline using MediaPipe landmarks, sliding windows, LSTM prediction, and top-3 confidence display.
+
+## Dataset Decision
+
+The Kaggle WLASL processed dataset is not bundled. It is word-level, large, and not the right source for ASL alphabet templates. For this PWA, letter examples should be recorded as MediaPipe landmark/angle sequences in the browser and stored locally or exported as compact JSON.
 
 ## Testing Direction
 

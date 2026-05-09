@@ -1,67 +1,28 @@
 [
-  {
-    "id": "pain-demo-01",
-    "gloss": "PAIN",
-    "label": "Pain",
-    "tags": ["medical", "demo"],
-    "examples": [
-      [
-        [0.11, 0.22, 0.31, 0.43, 0.52, 0.61],
-        [0.13, 0.25, 0.33, 0.44, 0.53, 0.62],
-        [0.16, 0.29, 0.35, 0.45, 0.54, 0.63]
-      ]
-    ]
-  },
-  {
-    "id": "chest-demo-01",
-    "gloss": "CHEST PAIN",
-    "label": "Chest pain",
-    "tags": ["medical", "urgent", "demo"],
-    "examples": [
-      [
-        [0.45, 0.31, 0.22, 0.18, 0.41, 0.57],
-        [0.44, 0.30, 0.23, 0.20, 0.43, 0.59],
-        [0.43, 0.29, 0.24, 0.22, 0.45, 0.61]
-      ]
-    ]
-  },
-  {
-    "id": "breath-demo-01",
-    "gloss": "SHORT BREATH",
-    "label": "Short breath",
-    "tags": ["medical", "urgent", "demo"],
-    "examples": [
-      [
-        [0.72, 0.61, 0.49, 0.38, 0.27, 0.16],
-        [0.70, 0.58, 0.47, 0.37, 0.29, 0.19],
-        [0.68, 0.55, 0.45, 0.36, 0.31, 0.22]
-      ]
-    ]
-  },
-  {
-    "id": "help-demo-01",
-    "gloss": "HELP",
-    "label": "Help",
-    "tags": ["basic", "demo"],
-    "examples": [
-      [
-        [0.20, 0.41, 0.62, 0.20, 0.41, 0.62],
-        [0.24, 0.45, 0.65, 0.22, 0.42, 0.64],
-        [0.28, 0.49, 0.68, 0.24, 0.43, 0.66]
-      ]
-    ]
-  },
-  {
-    "id": "allergy-demo-01",
-    "gloss": "ALLERGY",
-    "label": "Allergy",
-    "tags": ["medical", "demo"],
-    "examples": [
-      [
-        [0.33, 0.12, 0.51, 0.18, 0.72, 0.25],
-        [0.35, 0.15, 0.54, 0.20, 0.73, 0.27],
-        [0.37, 0.18, 0.57, 0.22, 0.74, 0.29]
-      ]
-    ]
-  }
+  { "id": "asl-letter-a", "gloss": "A", "label": "Letter A", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-b", "gloss": "B", "label": "Letter B", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-c", "gloss": "C", "label": "Letter C", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-d", "gloss": "D", "label": "Letter D", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-e", "gloss": "E", "label": "Letter E", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-f", "gloss": "F", "label": "Letter F", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-g", "gloss": "G", "label": "Letter G", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-h", "gloss": "H", "label": "Letter H", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-i", "gloss": "I", "label": "Letter I", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-j", "gloss": "J", "label": "Letter J", "tags": ["asl", "alphabet", "motion"], "examples": [] },
+  { "id": "asl-letter-k", "gloss": "K", "label": "Letter K", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-l", "gloss": "L", "label": "Letter L", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-m", "gloss": "M", "label": "Letter M", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-n", "gloss": "N", "label": "Letter N", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-o", "gloss": "O", "label": "Letter O", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-p", "gloss": "P", "label": "Letter P", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-q", "gloss": "Q", "label": "Letter Q", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-r", "gloss": "R", "label": "Letter R", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-s", "gloss": "S", "label": "Letter S", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-t", "gloss": "T", "label": "Letter T", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-u", "gloss": "U", "label": "Letter U", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-v", "gloss": "V", "label": "Letter V", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-w", "gloss": "W", "label": "Letter W", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-x", "gloss": "X", "label": "Letter X", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-y", "gloss": "Y", "label": "Letter Y", "tags": ["asl", "alphabet"], "examples": [] },
+  { "id": "asl-letter-z", "gloss": "Z", "label": "Letter Z", "tags": ["asl", "alphabet", "motion"], "examples": [] }
 ]

@@ -1,6 +1,6 @@
 import type { Landmark, MatchResult, SignTemplate } from "./types";
 
-const HAND_CONNECTIONS: Array<[number, number]> = [
+export const HAND_CONNECTIONS: Array<[number, number]> = [
   [0, 1],
   [1, 2],
   [2, 3],
@@ -23,29 +23,26 @@ const HAND_CONNECTIONS: Array<[number, number]> = [
   [19, 20]
 ];
 
+export const HAND_FEATURE_SIZE = HAND_CONNECTIONS.length * HAND_CONNECTIONS.length;
+
 export function landmarksToAngleFeatures(landmarks: Landmark[]) {
   if (landmarks.length < 21) {
     return [];
   }
 
-  const wrist = landmarks[0];
-  const scale = Math.max(distance(wrist, landmarks[9]), 0.001);
-
-  return HAND_CONNECTIONS.flatMap(([from, to]) => {
+  const vectors = HAND_CONNECTIONS.map(([from, to]) => {
     const a = landmarks[from];
     const b = landmarks[to];
-    const dx = (b.x - a.x) / scale;
-    const dy = (b.y - a.y) / scale;
-    const dz = ((b.z ?? 0) - (a.z ?? 0)) / scale;
-    const angle = Math.atan2(dy, dx) / Math.PI;
-    const length = Math.hypot(dx, dy, dz);
-
-    return [roundFeature(angle), roundFeature(length)];
+    return [b.x - a.x, b.y - a.y, (b.z ?? 0) - (a.z ?? 0)] as const;
   });
+
+  return vectors.flatMap((fromVector) =>
+    vectors.map((toVector) => roundFeature(vectorAngle(fromVector, toVector)))
+  );
 }
 
 export function combineHandFeatures(left: number[], right: number[]) {
-  const size = Math.max(left.length, right.length);
+  const size = HAND_FEATURE_SIZE;
   const paddedLeft = pad(left, size);
   const paddedRight = pad(right, size);
 
@@ -87,6 +84,10 @@ export function matchTemplate(
 
   for (const template of templates) {
     for (const example of template.examples) {
+      if (!example.length) {
+        continue;
+      }
+
       const distance = dtwDistance(cleaned, example);
       const confidence = clamp(1 - distance / threshold, 0, 1);
 
@@ -122,6 +123,19 @@ function frameDistance(a: number[], b: number[]) {
 
 function distance(a: Landmark, b: Landmark) {
   return Math.hypot(b.x - a.x, b.y - a.y, (b.z ?? 0) - (a.z ?? 0));
+}
+
+function vectorAngle(a: readonly [number, number, number], b: readonly [number, number, number]) {
+  const magnitude = Math.hypot(...a) * Math.hypot(...b);
+
+  if (magnitude < 0.000001) {
+    return 0;
+  }
+
+  const dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const normalized = clamp(dot / magnitude, -1, 1);
+
+  return Math.acos(normalized) / Math.PI;
 }
 
 function pad(values: number[], size: number) {

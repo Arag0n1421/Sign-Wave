@@ -36,6 +36,16 @@ export type SignTemplate = {
   examples: number[][][];
 };
 
+export type RecognitionCandidate = {
+  gloss: string;
+  label: string;
+  confidence: number;
+  source: "dtw-template" | "manual-demo" | "typed" | "future-model";
+  startedAt: number;
+  endedAt: number;
+  landmarksQuality: "good" | "partial" | "lost";
+};
+
 export type MatchResult = {
   template: SignTemplate;
   gloss: string;
