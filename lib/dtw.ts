@@ -121,10 +121,6 @@ function frameDistance(a: number[], b: number[]) {
   return Math.sqrt(sum / Math.max(size, 1));
 }
 
-function distance(a: Landmark, b: Landmark) {
-  return Math.hypot(b.x - a.x, b.y - a.y, (b.z ?? 0) - (a.z ?? 0));
-}
-
 function vectorAngle(a: readonly [number, number, number], b: readonly [number, number, number]) {
   const magnitude = Math.hypot(...a) * Math.hypot(...b);
 

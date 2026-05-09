@@ -25,6 +25,28 @@ type HandLandmarkerInstance = {
   close?: () => void;
 };
 
+type MediaPipeVisionModule = {
+  FilesetResolver: {
+    forVisionTasks: (path: string) => Promise<unknown>;
+  };
+  HandLandmarker: {
+    createFromOptions: (
+      fileset: unknown,
+      options: {
+        baseOptions: {
+          modelAssetPath: string;
+          delegate: "GPU" | "CPU";
+        };
+        runningMode: "VIDEO";
+        numHands: number;
+        minHandDetectionConfidence: number;
+        minHandPresenceConfidence: number;
+        minTrackingConfidence: number;
+      }
+    ) => Promise<HandLandmarkerInstance>;
+  };
+};
+
 type Props = {
   onGloss: (gloss: string, confidence: number) => void;
 };
@@ -92,9 +114,9 @@ export function SignRecognizer({ onGloss }: Props) {
       await videoRef.current.play();
 
       if (!landmarkerRef.current) {
-        const vision = await import("@mediapipe/tasks-vision");
+        const vision = await loadMediaPipeVision();
         const fileset = await vision.FilesetResolver.forVisionTasks(
-          "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+          "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm"
         );
         landmarkerRef.current = await vision.HandLandmarker.createFromOptions(fileset, {
           baseOptions: {
@@ -359,6 +381,15 @@ export function SignRecognizer({ onGloss }: Props) {
       </div>
     </div>
   );
+}
+
+async function loadMediaPipeVision() {
+  const cdnUrl = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/vision_bundle.mjs";
+  const importer = new Function("url", "return import(url)") as (
+    url: string
+  ) => Promise<MediaPipeVisionModule>;
+
+  return importer(cdnUrl);
 }
 
 function loadLocalTemplates() {
